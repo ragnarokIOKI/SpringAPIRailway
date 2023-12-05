@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Статусы маршрутов</title>
+        <link rel="stylesheet" th:href="@{/style.css}">
+        <ul>
+            <li><a href="/trains">Поезда</a></li>
+            <li><a href="/traintypes">Виды поездов</a></li>
+            <li><a href="/routes">Маршруты</a></li>
+            <li><a href="/routestatuses">Статусы маршрутов</a></li>
+            <li><a href="/routecompositions">Поезда на маршрутах</a></li>
+            <li><a href="/users">Пользователи</a></li>
+            <li><a href="/tickets">Билеты</a></li>
+            <li><a href="/seattypes">Виды мест</a></li>
+            <li><a href="/roles">Роли</a></li>
+        </ul>
+    </head>
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th colspan="2">Статус маршрута</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="status : ${routeStatuses}">
+                <td th:text="${status.id}"></td>
+                <td th:text="${status.nameRouteStatus}"></td>
+                <td><a th:href="@{'/routestatuses/deleterouteStatus/' + ${status.id}}">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:action="@{/routestatuses/processRouteStatus}" method="post">
+            <label>
+                <input type="text" th:name="nameRouteStatus" placeholder="Статус маршрута">
+            </label>
+            <input type="submit" value="Добавить">
+        </form>
+
+        <form th:action="@{/routestatuses/updateRouteStatus}" method="post">
+            <input type="hidden" th:name="_method" value="put"/>
+            <input type="number" th:name="id" placeholder="ID">
+            <input type="text" th:name="nameRouteStatus" placeholder="Статус маршрута">
+            <input type="submit" value="Обновить">
+        </form>
+    </body>
+</html>

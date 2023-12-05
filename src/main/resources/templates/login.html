@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div th:if="${param.error}">
+    Неверное имя пользователя или пароль.
+</div>
+<form th:action="@{/login}" method="post" th:object="${user}">
+    <div><label> Логин : <input type="text" name="username"/> </label></div>
+    <div><label> Пароль : <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Авторизация"/></div>
+</form>
+<a href="/registration">Регистрация</a>
+</body>
+</html>

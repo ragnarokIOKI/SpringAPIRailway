@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Роли</title>
+    <ul>
+        <li><a href="/trains">Поезда</a></li>
+        <li><a href="/traintypes">Виды поездов</a></li>
+        <li><a href="/routes">Маршруты</a></li>
+        <li><a href="/routestatuses">Статусы маршрутов</a></li>
+        <li><a href="/routecompositions">Поезда на маршрутах</a></li>
+        <li><a href="/users">Пользователи</a></li>
+        <li><a href="/tickets">Билеты</a></li>
+        <li><a href="/seattypes">Виды мест</a></li>
+        <li><a href="/roles">Роли</a></li>
+    </ul>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>№</th>
+        <th colspan="2">Название роли</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.id}"></td>
+        <td th:text="${role.nameRole}"></td>
+       <td><a th:href="@{'/roles/deleterole/' + ${role.id}}">Удалить</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<<form th:action="@{/roles/processRole}" method="post" th:object="${role}">
+   <label>
+       <input type="text" th:name="nameRole" placeholder="Название">
+   </label>
+   <input type="submit" value="Добавить">
+</form>
+
+<form th:action="@{/roles/updateRole}" method="post" th:object="${role}">
+    <label>
+        <input type="number" th:name="id" placeholder="ID">
+    </label>
+   <label>
+       <input type="text" th:name="nameRole" placeholder="Название">
+   </label>
+   <input type="submit" value="Обновить">
+</form>
+</body>
+</html>

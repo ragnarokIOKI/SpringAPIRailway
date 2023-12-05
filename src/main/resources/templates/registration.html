@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div th:if="${message}">
+    Пользователь уже существует
+</div>
+<form th:action="@{/registration}" method="post">
+    <label>
+        <input type="text" th:name="firstName" placeholder="Фамилия" required>
+    </label>
+    <label>
+        <input type="text" th:name="secondName" placeholder="Имя" required>
+    </label>
+    <label>
+        <input type="text" th:name="middleName" placeholder="Отчество">
+    </label>
+    <label>
+        <input type="date" th:name="birthday" placeholder="Дата рождения" required>
+    </label>
+    <label>
+        <input type="text" th:name="passportSeries" placeholder="Серия паспорта" required>
+    </label>
+    <label>
+        <input type="text" th:name="passportNumber" placeholder="Номер паспорта" required>
+    </label>
+    <label>
+        <input type="text" th:name="cardNumber" placeholder="Номер карты" required>
+    </label>
+    <label>
+        <input type="text" th:name="cardHolder" placeholder="Владелец карты" required>
+    </label>
+    <label>
+        <input type="text" th:name="validity" placeholder="Срок действия карты" required>
+    </label>
+    <label>
+        <input type="text" th:name="username" placeholder="Логин" required>
+    </label>
+    <label>
+        <input type="text" th:name="password" placeholder="Пароль" required>
+    </label>
+    <input type="submit" value="Зарегистрироваться">
+</form>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Маршруты</title>
+        <link rel="stylesheet" th:href="@{/style.css}">
+        <ul>
+            <li><a href="/trains">Поезда</a></li>
+            <li><a href="/traintypes">Виды поездов</a></li>
+            <li><a href="/routes">Маршруты</a></li>
+            <li><a href="/routestatuses">Статусы маршрутов</a></li>
+            <li><a href="/routecompositions">Поезда на маршрутах</a></li>
+            <li><a href="/users">Пользователи</a></li>
+            <li><a href="/tickets">Билеты</a></li>
+            <li><a href="/seattypes">Виды мест</a></li>
+            <li><a href="/roles">Роли</a></li>
+        </ul>
+    </head>
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Номер маршрута</th>
+                <th>Время отправления</th>
+                <th>Время прибытия</th>
+                <th>Точка отправления</th>
+                <th>Точка прибытия</th>
+                <th colspan="2">Статус маршрута</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="route : ${routes}">
+                <td th:text="${route.id}"></td>
+                <td th:text="${route.numberRoute}"></td>
+                <td th:text="${route.departureTimeRoute}"></td>
+                <td th:text="${route.arrivalTimeRoute}"></td>
+                <td th:text="${route.departurePoint}"></td>
+                <td th:text="${route.arrivalPoint}"></td>
+                <td th:text="${route.routeStatus.nameRouteStatus}"></td>
+                <td><a th:href="@{'/routes/deleteroute/' + ${route.id}}">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:action="@{/routes/processRoute}" method="post">
+            <label>
+                <input type="text" th:name="numberRoute" placeholder="Номер маршрута" required>
+            </label>
+            <label>
+                <input type="time" th:name="departureTimeRoute" placeholder="Время отправления" required step="1">
+            </label>
+            <label>
+                <input type="time" th:name="arrivalTimeRoute" placeholder="Время прибытия" required step="1">
+            </label>
+            <label>
+                <input type="text" th:name="departurePoint" placeholder="Пункт отправления" required>
+            </label>
+            <label>
+                <input type="text" th:name="arrivalPoint" placeholder="Пункт прибытия" required>
+            </label>
+            <select th:name="routeStatus.id">
+                <option th:each="status : ${routeStatuses}" th:value="${status.id}" th:text="${status.nameRouteStatus}"></option>
+            </select>
+            <input type="submit" value="Добавить">
+        </form>
+
+        <form th:action="@{/routes/updateRoute}" method="post">
+            <input type="hidden" th:name="_method" value="put"/>
+            <input type="number" th:name="id" placeholder="ID" style="width: 80px">
+            <label>
+                <input type="text" th:name="numberRoute" placeholder="Номер маршрута" required>
+            </label>
+            <label>
+                <input type="time" th:name="departureTimeRoute" placeholder="Время отправления" required step="1">
+            </label>
+            <label>
+                <input type="time" th:name="arrivalTimeRoute" placeholder="Время прибытия" required step="1">
+            </label>
+            <label>
+                <input type="text" th:name="departurePoint" placeholder="Пункт отправления" required>
+            </label>
+            <label>
+                <input type="text" th:name="arrivalPoint" placeholder="Пункт прибытия" required>
+            </label>
+            <select th:name="routeStatus.id">
+                <option th:each="status : ${routeStatuses}" th:value="${status.id}" th:text="${status.nameRouteStatus}"></option>
+            </select>
+            <input type="submit" value="Обновить">
+        </form>
+
+    </body>
+</html>
